@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
   res.send("Hello from ROOOOT")
 })
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000
 // localhost:3003
 app.listen(PORT, () => {
-  console.log("Server is up and listening on 3003 ...")
+  console.log("Server is up and listening on: " + PORT)
 })
