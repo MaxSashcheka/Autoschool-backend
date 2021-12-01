@@ -59,6 +59,8 @@ router.get("/", (req,res) => {
     const queryString = "INSERT INTO `group` (name, lessons_start_date, lessons_end_date, category_id, teacher_id, lessons_time_id) VALUES (?, ?, ?, ?, ?, ?)"
     getConnection().query(queryString, [req.body.name, req.body.lessons_start_date, req.body.lessons_end_date, req.body.category_id, req.body.teacher_id, req.body.lessons_time_id], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -103,10 +105,10 @@ router.get("/", (req,res) => {
     const connection = getConnection()
 
     const groupId = req.params.id
-    const queryString = "DELETE FROM `group` WHERE group_id = ?"
   
-    connection.query(queryString, [req.params.id], (error, rows, fields) => {
+    connection.query("DELETE FROM `group` WHERE group_id = ?", [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
         res.sendStatus(500)
       }
       res.end()

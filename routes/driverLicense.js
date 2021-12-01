@@ -21,6 +21,8 @@ function getConnection() {
     const queryString = "Select * FROM driver_license"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
         res.end()
       }
@@ -43,6 +45,8 @@ function getConnection() {
     const queryString = "INSERT INTO driver_license (issue_date, number, validity) VALUES (?, ?, ?)"
     getConnection().query(queryString, [req.body.issue_date, req.body.number, req.body.validity], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -58,6 +62,8 @@ function getConnection() {
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
       }
       res.end()

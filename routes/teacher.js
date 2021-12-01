@@ -21,6 +21,8 @@ function getConnection() {
     const queryString = "Select * FROM teacher"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
         res.end()
       }
@@ -74,6 +76,8 @@ function getConnection() {
     const queryString = "INSERT INTO teacher (first_name, last_name, middle_name, passport_number, phone_number) VALUES (?, ?, ?, ?, ?)"
     getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.middle_name, req.body.passport_number, phoneNumber], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -89,6 +93,8 @@ function getConnection() {
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
       }
       res.end()

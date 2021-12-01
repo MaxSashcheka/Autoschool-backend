@@ -21,6 +21,8 @@ function getConnection() {
     const queryString = "Select * FROM car"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
         res.end()
       }
@@ -43,6 +45,8 @@ function getConnection() {
     const queryString = "INSERT INTO car (number, name, color) VALUES (?, ?, ?)"
     getConnection().query(queryString, [req.body.number, req.body.name, req.body.color], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -54,14 +58,14 @@ function getConnection() {
     const connection = getConnection()
 
     const groupId = req.params.id
-    const queryString = "DELETE FROM car WHERE car_id = ?"
-  
-    connection.query(queryString, [req.params.id], (error, rows, fields) => {
+
+    connection.query("DELETE FROM car WHERE car_id = ?", [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
       }
       res.end()
-
     })
   })
 

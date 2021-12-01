@@ -21,6 +21,8 @@ function getConnection() {
     const queryString = "SELECT * FROM exam JOIN exam_type ON exam_type.exam_type_id = exam.exam_type_id"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
         res.end()
       }
@@ -47,6 +49,8 @@ function getConnection() {
     const queryString = "INSERT INTO exam (date, exam_type_id, group_id) VALUES (?, ?, ?)"
     getConnection().query(queryString, [req.body.date, req.body.exam_type_id, req.body.group_id], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -62,6 +66,8 @@ function getConnection() {
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
       }
       res.end()

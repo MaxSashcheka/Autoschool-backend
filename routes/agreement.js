@@ -21,6 +21,8 @@ function getConnection() {
     const queryString = "Select * FROM agreement"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
         res.end()
       }
@@ -44,6 +46,8 @@ function getConnection() {
     const queryString = "INSERT INTO agreement (amount, signing_date, administrator_id, student_id) VALUES (?, ?, ?, ?)"
     getConnection().query(queryString, [req.body.amount, req.body.signing_date, req.body.administrator_id, req.body.student_id], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -59,6 +63,8 @@ function getConnection() {
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
       }
       res.end()

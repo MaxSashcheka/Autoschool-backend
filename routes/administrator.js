@@ -21,6 +21,8 @@ function getConnection() {
     const queryString = "Select * FROM administrator"
     connection.query(queryString, (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
         res.end()
       }
@@ -33,6 +35,7 @@ function getConnection() {
           middleName: row.middle_name,
           phoneNumber: row.phone_number,
           email: row.email,
+          password: row.password
         }
       })
       res.json(administrators)
@@ -45,9 +48,11 @@ function getConnection() {
     var phoneNumber = req.body.phone_number
     phoneNumber = phoneNumber.substring(1, 20)
     phoneNumber = "+" + phoneNumber
-    const queryString = "INSERT INTO administrator (first_name, last_name, middle_name, phone_number, email) VALUES (?, ?, ?, ?, ?)"
-    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.middle_name, phoneNumber, req.body.email], (err, results, fields) => {
+    const queryString = "INSERT INTO administrator (first_name, last_name, middle_name, phone_number, email, password) VALUES (?, ?, ?, ?, ?, ?)"
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.middle_name, phoneNumber, req.body.email, req.body.password], (err, results, fields) => {
       if (err) {
+        console.log(err)
+
         res.sendStatus(500)
         return
       }
@@ -63,6 +68,8 @@ function getConnection() {
   
     connection.query(queryString, [req.params.id], (error, rows, fields) => {
       if (error) {
+        console.log(error)
+
         res.sendStatus(500)
       }
       res.end()
@@ -76,8 +83,8 @@ function getConnection() {
     var phoneNumber = req.body.phone_number
     phoneNumber = phoneNumber.substring(1, 20)
     phoneNumber = "+" + phoneNumber
-    const queryString = "UPDATE administrator SET first_name = ?, last_name = ?, middle_name = ?, phone_number = ?, email = ? WHERE administrator_id = ?"
-    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.middle_name, phoneNumber, req.body.email, req.params.id], (err, results, fields) => {
+    const queryString = "UPDATE administrator SET first_name = ?, last_name = ?, middle_name = ?, phone_number = ?, email = ?, password = ? WHERE administrator_id = ?"
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.middle_name, phoneNumber, req.body.email, req.body.password, req.params.id], (err, results, fields) => {
       if (err) {
         console.log(err)
         res.sendStatus(500)
